@@ -108,7 +108,9 @@ class PHPSession
     private
 
     def define_or_find_struct(name, properties)
-      if Struct.const_defined?(name)
+      if name == "stdClass"
+        struct = PHPSession::Classes::StdClass.new(*properties.map(&:to_sym))
+      elsif Struct.const_defined?(name)
         struct = Struct.const_get(name)
         if struct.members.sort != properties.map(&:to_sym).sort
           raise Errors::ParseError, "objects properties don't match with the other object which has same class"

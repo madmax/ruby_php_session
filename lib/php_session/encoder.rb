@@ -103,7 +103,7 @@ class PHPSession
           kv.map {|el| @encoder.serialize(el)}
         end
         class_name = value.class.to_s.gsub(/^Struct::/,'')
-        %|o:#{class_name.bytesize}:"#{class_name}":#{key_values.size}:{#{serialized_key_values.flatten.join}}|
+        %|O:#{class_name.bytesize}:"#{class_name}":#{key_values.size}:{#{serialized_key_values.flatten.join}}|
       end
     end
   end

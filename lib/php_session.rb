@@ -4,6 +4,7 @@ require "php_session/errors"
 require "php_session/decoder"
 require "php_session/encoder"
 require "php_session/store_engine/file"
+require "php_session/classes/std_class"
 
 class PHPSession
   attr_reader :data
