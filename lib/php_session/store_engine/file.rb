@@ -45,7 +45,7 @@ class PHPSession
           unless f.flock(::File::LOCK_EX)
             raise PHPSession::Errors, "can't obtain lock of session file"
           end
-          if @option[:session_file_permission] && f.owned?
+          if @option[:session_file_permission] && ::File.owned?(file_path)
             f.chmod(@option[:session_file_permission])
           end
           yield(f)
