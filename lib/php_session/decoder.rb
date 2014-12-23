@@ -86,11 +86,18 @@ class PHPSession
             @state = State::ArrayEnd
             @state.parse(self)
           else
-            hash = {}
+            hash_or_array = {}
+
             key_values_array.each_slice(2) do |kv|
-              hash[kv[0]] = kv[1]
+              hash_or_array[kv[0]] = kv[1]
             end
-            process_value(hash)
+
+            # check if our hash is array!
+            if (0..hash_or_array.keys.size-1).to_a == hash_or_array.keys
+              hash_or_array = hash_or_array.values
+            end
+
+            process_value(hash_or_array)
 
             @state = State::ArrayEnd
             @state.parse(self)
